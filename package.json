@@ -9,5 +9,22 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adityasolge93/expiry-date-express-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adityasolge93/expiry-date-express-server/issues"
+  },
+  "homepage": "https://github.com/adityasolge93/expiry-date-express-server#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.9.2"
+  }
 }
