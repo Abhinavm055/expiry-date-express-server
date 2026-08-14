@@ -74,4 +74,16 @@ router.post('/register', registerValidators, authController.register);
  */
 router.post('/login', loginValidators, authController.login);
 
+/**
+ * @swagger
+ * /auth/logout:
+ *   post:
+ *     summary: Logout a user
+ *     tags: [Auth]
+ *     responses:
+ *       200:
+ *         description: User logged out successfully
+ */
+router.post('/logout', authController.logout);
+
 module.exports = router;

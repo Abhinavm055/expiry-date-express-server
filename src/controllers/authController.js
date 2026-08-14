@@ -34,11 +34,20 @@ const authController = {
 
             res.status(200).json({
                 message: 'User authenticated',
-                user: { name: user.name, email: user.email }
+                user: { name: user.name, email: user.email },
+                token: token
             });
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
+    },
+    logout: async (req, res) => {
+        res.clearCookie('jwtToken', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            path: '/'
+        });
+        res.status(200).json({ message: 'User logged out successfully' });
     }
 };
 
