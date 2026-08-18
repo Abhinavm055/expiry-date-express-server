@@ -7,19 +7,20 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "M Abhinav",
+  "author": "",
   "license": "ISC",
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Abhinavm055/expiry-date-express-server.git"
+    "url": "git+https://github.com/adityasolge93/expiry-date-express-server.git"
   },
   "bugs": {
-    "url": "https://github.com/Abhinavm055/expiry-date-express-server/issues"
+    "url": "https://github.com/adityasolge93/expiry-date-express-server/issues"
   },
-  "homepage": "https://github.com/Abhinavm055/expiry-date-express-server#readme",
+  "homepage": "https://github.com/adityasolge93/expiry-date-express-server#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
