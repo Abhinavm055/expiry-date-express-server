@@ -1,6 +1,16 @@
 const { validationResult } = require('express-validator');
 const authService = require('../services/authService');
 
+const getCookieOptions = () => {
+    const isProduction = process.env.NODE_ENV === 'production';
+    return {
+        httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? 'none' : 'lax',
+        path: '/'
+    };
+};
+
 const authController = {
     register: async (req, res) => {
         const errors = validationResult(req);
@@ -10,8 +20,18 @@ const authController = {
 
         try {
             const { name, email, password } = req.body;
-            const newUser = await authService.register(name, email, password);
-            res.status(201).json({ message: 'User registered successfully', user: { name: newUser.name, email: newUser.email } });
+            await authService.register(name, email, password);
+            
+            // Log in user automatically upon registration
+            const { user, token } = await authService.login(email, password);
+            
+            res.cookie('jwtToken', token, getCookieOptions());
+
+            res.status(201).json({
+                message: 'User registered successfully',
+                user: { name: user.name, email: user.email },
+                token: token
+            });
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
@@ -26,11 +46,7 @@ const authController = {
             const { email, password } = req.body;
             const { user, token } = await authService.login(email, password);
             
-            res.cookie('jwtToken', token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                path: '/'
-            });
+            res.cookie('jwtToken', token, getCookieOptions());
 
             res.status(200).json({
                 message: 'User authenticated',
@@ -42,11 +58,7 @@ const authController = {
         }
     },
     logout: async (req, res) => {
-        res.clearCookie('jwtToken', {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            path: '/'
-        });
+        res.clearCookie('jwtToken', getCookieOptions());
         res.status(200).json({ message: 'User logged out successfully' });
     }
 };

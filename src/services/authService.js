@@ -34,7 +34,7 @@ const authService = {
             email: user.email,
             _id: user._id,
         }, process.env.JWT_SECRET || 'fallback_secret',
-            { expiresIn: '1h' }
+            { expiresIn: '7d' }
         );
 
         return { user, token };
